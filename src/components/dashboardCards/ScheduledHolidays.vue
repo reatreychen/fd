@@ -1,6 +1,6 @@
 <template>
   <section class="mt-6">
-    <div class="bg-white w-[400px] min-[200px]">
+    <div class="bg-white w-[400px] min-w-[200px]">
       <h1 class="text-xl px-4 py-4 font-semibold text-[#2a2f39]">
         Scheduled Holidays
       </h1>

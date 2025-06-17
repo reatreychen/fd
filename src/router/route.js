@@ -3,7 +3,10 @@ import DefaultLayout from "../layouts/DefaultLayout.vue";
 import Dashboard from "../views/Dashboard.vue";
 import RateCategory from "../views/RateCategory.vue";
 import AddCategory from "../views/AddCategory.vue";
-
+import PriceOverview from "../views/PriceOverview.vue";
+import RoomAvailabilities from "../views/RoomAvailabilities.vue";
+import Cancellation from "../views/Cancellation.vue";
+import RateAndAvailabilityLayout from "../layouts/RateAndAvailabilityLayout.vue";
 const routes = [
   {
     path: "/",
@@ -17,14 +20,37 @@ const routes = [
         component: Dashboard,
       },
       {
-        path: "rate-category",
-        name: "rate-category",
-        component: RateCategory,
-      },
-      {
-        path: "add/category",
-        name: "AddCategory",
-        component: AddCategory,
+        path: "rate-availability",
+        name: "rate-availability",
+        redirect: { name: "rate-category" },
+        component: RateAndAvailabilityLayout,
+        children: [
+          {
+            path: "add-category",
+            name: "add-category",
+            component: AddCategory,
+          },
+          {
+            path: "rate-category",
+            name: "rate-category",
+            component: RateCategory,
+          },
+          {
+            path: "price-overview",
+            name: "price-overview",
+            component: PriceOverview,
+          },
+          {
+            path: "room-availabilities",
+            name: "room-availabilities",
+            component: RoomAvailabilities,
+          },
+          {
+            path: "cancellation-policy",
+            name: "cancellation-policy",
+            component: Cancellation,
+          },
+        ],
       },
       {
         path: "promotion",

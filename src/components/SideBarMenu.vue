@@ -2,16 +2,16 @@
   <aside
     class="z-40 w-[400px] h-screen transition-transform -translate-x-full sm:translate-x-0"
   >
-    <div class="h-full px-3 py-4 overflow-y-auto">
+    <div class="h-full py-4 overflow-y-auto">
       <ul class="space-y-4 font-medium">
+        <!-- Dashboard -->
         <li>
           <RouterLink
-          class="flex items-center p-2 gap-3"
+          class="flex items-center p-2 gap-3 px-8"
            :to = "{name: 'Dashboard'}"
-          name =  "myDashboard"
           :class ="{'text-[#164a9f]' :activeTab === 'Dashboard'},
-            {'text-[#2a2f39]' :activeTab !== 'Dashboard'}"
-            @click = "activeTab = 'Dashboard'"
+          {'text-[#2a2f39] hover:bg-gray-50' :activeTab !== 'Dashboard'}"
+            @click = "activeTab = 'Dashboard '"
             
           >
             <svg
@@ -33,38 +33,147 @@
           </RouterLink>
         </li>
 
-        <li >
+        <!-- Rate and Availability -->
+        <li>
           <div
             @click="toggleSubMenu"
-            class="flex items-center p-2 gap-3 text-[#2a2f39] cursor-pointer"
+            class="flex items-center px-8 py-2.5 transition-colors duration-200 cursor-pointer"
+            :class="{
+              'bg-[#e6e6e6] text-[#2a2f39]': isRateActive,
+              'text-[#2a2f39]': !isRateActive,
+            }"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              height="24px"
+              height="20px"
               viewBox="0 -960 960 960"
-              width="24px"
-              fill="#2a2f39"
-              class="rotate-90 text-[#2a2f39]"
+              width="20px"
+              fill="currentColor"
+              class="mr-3"
+              :class="{
+                'text-[#2a2f39]': !isRateActive,
+              }"
             >
               <path
                 d="M856-390 570-104q-12 12-27 18t-30 6q-15 0-30-6t-27-18L103-457q-11-11-17-25.5T80-513v-287q0-33 23.5-56.5T160-880h287q16 0 31 6.5t26 17.5l352 353q12 12 17.5 27t5.5 30q0 15-5.5 29.5T856-390ZM513-160l286-286-353-354H160v286l353 354ZM260-640q25 0 42.5-17.5T320-700q0-25-17.5-42.5T260-760q-25 0-42.5 17.5T200-700q0 25 17.5 42.5T260-640Zm220 160Z"
               />
             </svg>
-
-            <p class="ms-3 font-normal">Rate and Availability</p>
+            <span>Rate and Availability</span>
           </div>
 
           <!-- Submenu -->
           <ul
             v-if="showSubMenu"
-            class="ml-12 space-y-2 text-sm text-[#2a2f39]"
+            class=" space-y-1 pl-8 bg-[#ededee]"
           >
-            <li v-for="item in rateSubMenuItems" :key="item.id">
+            <li>
               <RouterLink
-                :to="{ name: item.id }"
-                class="block p-2 hover:text-[#164a9f]"
+                :to="{ name: 'rate-category' }"
+                class="flex items-center px-3 py-3 gap-4 transition-colors duration-200"
+                :class="{
+                  ' text-[#164a9f] font-medium':
+                    activeTab === 'rate-category',
+                  'text-gray-600 hover:text-[#164a9f] ':
+                    activeTab !== 'rate-category',
+                }"
+                @click="activeTab = 'rate-category'"
               >
-                {{ item.label }}
+                <span
+                  class="w-2 h-2 rounded-full mr-2"
+                  :class="{
+                    'bg-[#164a9f]': activeTab === 'rate-category',
+                    ' bg-[#e6e6e6]': activeTab !== 'rate-category',
+                  }"
+                ></span>
+                Rate category
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink
+                :to="{ name: 'add-category' }"
+                class="flex items-center px-3 py-2 gap-4 transition-colors duration-200"
+                :class="{
+                  ' text-[#164a9f] font-medium':
+                    activeTab === 'add-category',
+                  'text-gray-600 hover:text-[#164a9f] ':
+                    activeTab !== 'add-category',
+                }"
+                @click="activeTab = 'add-category'"
+              >
+                <span
+                  class="w-2 h-2 rounded-full mr-2"
+                  :class="{
+                    'bg-[#164a9f]': activeTab === 'add-category',
+                    'bg-[#e6e6e6]': activeTab !== 'add-category',
+                  }"
+                ></span>
+                Add category
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink
+                :to="{ name: 'price-overview' }"
+                class="flex items-center px-3 py-2 gap-4 transition-colors duration-200"
+                :class="{
+                  ' text-[#164a9f] font-medium':
+                    activeTab === 'price-overview',
+                  'text-gray-600 hover:text-[#164a9f] ':
+                    activeTab !== 'price-overview',
+                }"
+                @click="activeTab = 'price-overview'"
+              >
+                <span
+                  class="w-2 h-2 rounded-full mr-2"
+                  :class="{
+                    'bg-[#164a9f]': activeTab === 'price-overview',
+                    'bg-[#e6e6e6]': activeTab !== 'price-overview',
+                  }"
+                ></span>
+                Price overview
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink
+                :to="{ name: 'room-availabilities' }"
+                class="flex items-center px-3 py-2 gap-4 transition-colors duration-200"
+                :class="{
+                  ' text-[#164a9f] font-medium':
+                    activeTab === 'room-availabilities',
+                  'text-gray-600 hover:text-[#164a9f] ':
+                    activeTab !== 'room-availabilities',
+                }"
+                @click="activeTab = 'room-availabilities'"
+              >
+                <span
+                  class="w-2 h-2 rounded-full mr-2"
+                  :class="{
+                    'bg-[#164a9f]': activeTab === 'room-availabilities',
+                    'bg-[#e6e6e6]': activeTab !== 'room-availabilities',
+                  }"
+                ></span>
+                Room Availabilities
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink
+                :to="{ name: 'cancellation-policy' }"
+                class="flex items-center px-3 py-2 gap-4 transition-colors duration-200"
+                :class="{
+                  ' text-[#164a9f] font-medium':
+                    activeTab === 'cancellation-policy',
+                  'text-gray-600 hover:text-[#164a9f] ':
+                    activeTab !== 'cancellation-policy',
+                }"
+                @click="activeTab = 'cancellation-policy'"
+              >
+                <span
+                  class="w-2 h-2 rounded-full mr-2"
+                  :class="{
+                    'bg-[#164a9f]': activeTab === 'cancellation-policy',
+                    'bg-[#e6e6e6]': activeTab !== 'cancellation-policy',
+                  }"
+                ></span>
+                Cancellation policy
               </RouterLink>
             </li>
           </ul>
@@ -79,7 +188,7 @@
               { 'text-[#2a2f39]': activeTab !== 'Promotion' })
             "
             @click="activeTab = 'Promotion'"
-            class="flex items-center p-2 gap-3 text-[#2a2f39]"
+            class="flex items-center p-2 gap-3 text-[#2a2f39] px-8"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -106,7 +215,7 @@
               { 'text-[#2a2f39]': activeTab !== 'Guests' })
             "
             @click="activeTab = 'Guests'"
-            class="flex items-center p-2 gap-3 text-[#2a2f39]"
+            class="flex items-center p-2 gap-3 text-[#2a2f39] px-8"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -133,7 +242,7 @@
               { 'text-[#2a2f39]': activeTab !== 'PropertyDetail' })
             "
             @click="activeTab = 'PropertyDetail'"
-            class="flex items-center p-2 gap-3 text-[#2a2f39]"
+            class="flex items-center p-2 gap-3 text-[#2a2f39] px-8"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -159,7 +268,7 @@
               { 'text-[#2a2f39]': activeTab !== 'Rooms' })
             "
             @click="activeTab = 'Rooms'"
-            class="flex items-center p-2 gap-3 text-[#2a2f39]"
+            class="flex items-center p-2 gap-3 text-[#2a2f39] px-8"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -185,7 +294,7 @@
               { 'text-[#2a2f39]': activeTab !== 'RatingAndReview' })
             "
             @click="activeTab = 'RatingAndReview'"
-            class="flex items-center p-2 gap-3 text-[#2a2f39]"
+            class="flex items-center p-2 gap-3 text-[#2a2f39] px-8"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -211,7 +320,7 @@
               { 'text-[#2a2f39]': activeTab !== 'SaleBooster' })
             "
             @click="activeTab = 'SaleBooster'"
-            class="flex items-center p-2 gap-3 text-[#2a2f39]"
+            class="flex items-center p-2 gap-3 text-[#2a2f39] px-8"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -237,7 +346,7 @@
               { 'text-[#2a2f39]': activeTab !== 'IncomeAndCommission' })
             "
             @click="activeTab = 'IncomeAndCommission'"
-            class="flex items-center p-2 gap-3 text-[#2a2f39]"
+            class="flex items-center p-2 gap-3 text-[#2a2f39] px-8"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -263,7 +372,7 @@
               { 'text-[#2a2f39]': activeTab !== 'CotaferSupport' })
             "
             @click="activeTab = 'CotaferSupport'"
-            class="flex items-center p-2 gap-3 text-[#2a2f39]"
+            class="flex items-center p-2 gap-3 text-[#2a2f39] px-8"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -289,7 +398,7 @@
               { 'text-[#2a2f39]': activeTab !== 'Account' })
             "
             @click="activeTab = 'Account'"
-            class="flex items-center p-2 gap-3 text-[#2a2f39]"
+            class="flex items-center p-2 gap-3 text-[#2a2f39] px-8"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -315,20 +424,41 @@ export default {
   data() {
     return {
       activeTab: this.$route.name,
-      showSubMenu : false,
-      rateSubMenuItems: [
-        {id: 'rate-category', label: 'Rate category'},
-      ],
+      showSubMenu: false,
     };
+  },
+  computed: {
+    isRateActive() {
+      const rateRoutes = [
+        "rate-category",
+        "add-category",
+        "price-overview",
+        "room-availabilities",
+        "cancellation-policy",
+      ];
+      return rateRoutes.includes(this.activeTab);
+    },
   },
   methods: {
     toggleSubMenu() {
-      this.showSubMenu = !this.showSubMenu
+      this.showSubMenu = !this.showSubMenu;
     },
   },
   watch: {
     "$route.name"(newName) {
       this.activeTab = newName;
+
+      const rateRoutes = [
+        "rate-category",
+        "add-category",
+        "price-overview",
+        "room-availabilities",
+        "cancellation-policy",
+      ];
+
+      if (rateRoutes.includes(newName)) {
+        this.showSubMenu = true;
+      }
     },
   },
 };

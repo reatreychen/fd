@@ -1,13 +1,9 @@
 <template>
   <section>
-    <div>
-      <h1 class="text-white text-3xl font-semibold text-center">
-        Rate and Availability
-      </h1>
       <div class="bg-white p-6 mt-3">
         <div class="flex items-center justify-between">
           <article>
-            <h2 class="font-medium text-xl">Reservation</h2>
+            <h2 class=" font-semibold text-2xl text-[#2a2f39]">Reservation</h2>
             <p class="text-[#a2a5ab] font-normal pt-2">
               Here are the categories you have created.
             </p>
@@ -130,7 +126,6 @@
           </div>
         </div>
       </div>
-    </div>
   </section>
 </template>
 
@@ -231,7 +226,7 @@ export default {
       this.categories[index].showContent = !this.categories[index].showContent;
     },
     redirectToAddCategory() {
-      this.$router.push({ name: "AddCategory" });
+      this.$router.push({ name: "add-category" });
     },
   },
 };
