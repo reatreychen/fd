@@ -7,12 +7,11 @@
         <!-- Dashboard -->
         <li>
           <RouterLink
-          class="flex items-center p-2 gap-3 px-8"
-           :to = "{name: 'Dashboard'}"
-          :class ="{'text-[#164a9f]' :activeTab === 'Dashboard'},
-          {'text-[#2a2f39] hover:bg-gray-50' :activeTab !== 'Dashboard'}"
-            @click = "activeTab = 'Dashboard '"
-            
+            class="flex items-center p-2 gap-3 px-8"
+            :to="{ name: 'Dashboard' }"
+            :class = "{ 'text-[#164a9f]': activeTab === 'Dashboard' },
+              { 'text-[#2a2f39] hover:bg-gray-50': activeTab !== 'Dashboard' }"
+              @click = "activeTab = 'Dashobard'"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +35,7 @@
         <!-- Rate and Availability -->
         <li>
           <div
-            @click="toggleSubMenu"
+            @click="toggleSubMenuRate"
             class="flex items-center px-8 py-2.5 transition-colors duration-200 cursor-pointer"
             :class="{
               'bg-[#e6e6e6] text-[#2a2f39]': isRateActive,
@@ -63,16 +62,15 @@
 
           <!-- Submenu -->
           <ul
-            v-if="showSubMenu"
-            class=" space-y-1 pl-8 bg-[#ededee]"
+            v-if="showSubMenuRateAvailable"
+            class="space-y-1 pl-8 bg-[#ededee]"
           >
             <li>
               <RouterLink
                 :to="{ name: 'rate-category' }"
                 class="flex items-center px-3 py-3 gap-4 transition-colors duration-200"
                 :class="{
-                  ' text-[#164a9f] font-medium':
-                    activeTab === 'rate-category',
+                  ' text-[#164a9f] font-medium': activeTab === 'rate-category',
                   'text-gray-600 hover:text-[#164a9f] ':
                     activeTab !== 'rate-category',
                 }"
@@ -93,8 +91,7 @@
                 :to="{ name: 'add-category' }"
                 class="flex items-center px-3 py-2 gap-4 transition-colors duration-200"
                 :class="{
-                  ' text-[#164a9f] font-medium':
-                    activeTab === 'add-category',
+                  ' text-[#164a9f] font-medium': activeTab === 'add-category',
                   'text-gray-600 hover:text-[#164a9f] ':
                     activeTab !== 'add-category',
                 }"
@@ -115,8 +112,7 @@
                 :to="{ name: 'price-overview' }"
                 class="flex items-center px-3 py-2 gap-4 transition-colors duration-200"
                 :class="{
-                  ' text-[#164a9f] font-medium':
-                    activeTab === 'price-overview',
+                  ' text-[#164a9f] font-medium': activeTab === 'price-overview',
                   'text-gray-600 hover:text-[#164a9f] ':
                     activeTab !== 'price-overview',
                 }"
@@ -179,32 +175,126 @@
           </ul>
         </li>
 
-
+        <!-- Promotion -->
         <li>
-          <RouterLink
-            :to="{ name: 'Promotion' }"
-            :class="
-              ({ 'text-[#164a9f]': activeTab === 'Promotion' },
-              { 'text-[#2a2f39]': activeTab !== 'Promotion' })
-            "
-            @click="activeTab = 'Promotion'"
-            class="flex items-center p-2 gap-3 text-[#2a2f39] px-8"
+          <div
+            @click="toggleSubMenuPromotion"
+            class="flex items-center px-8 gap-3 py-2.5 transition-colors duration-200 cursor-pointer"
+            :class="{
+              'bg-[#e6e6e6] text-[#2a2f39]': isPromotionActive,
+              'text-[#2a2f39]': !isPromotionActive,
+            }"
           >
             <svg
+              fill="#000000"
+              viewBox="0 0 64 64"
+              class=" size-6 text-[#2a2f39]"
               xmlns="http://www.w3.org/2000/svg"
-              height="24px"
-              viewBox="0 -960 960 960"
-              width="24px"
-              fill="#2a2f39"
-              class="text-[#2a2f39]"
             >
-              <path
-                d="M720-440v-80h160v80H720Zm48 280-128-96 48-64 128 96-48 64Zm-80-480-48-64 128-96 48 64-128 96ZM200-200v-160h-40q-33 0-56.5-23.5T80-440v-80q0-33 23.5-56.5T160-600h160l200-120v480L320-360h-40v160h-80Zm240-182v-196l-98 58H160v80h182l98 58Zm120 36v-268q27 24 43.5 58.5T620-480q0 41-16.5 75.5T560-346ZM300-480Z"
-              />
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <g id="a"></g>
+                <g id="b">
+                  <path
+                    d="M50,16.0146v-5.5253c0-.1943-.1123-.3706-.2881-.4531-.1748-.0811-.3848-.0552-.5322,.0693-6.8387,5.7183-17.4261,6.855-17.7166,6.885l-11.8411,.7893c-1.5962,.1064-3.1899,.3672-4.7363,.7749-1.1102,.2924-1.8854,1.2913-1.8857,2.4287h-.5001c-2.4814,0-4.5,2.3467-4.5,5.2314v3.5483c0,2.8848,2.0186,5.2314,4.5,5.2314h.5001c.0002,1.1374,.7755,2.1363,1.8857,2.4287,.9074,.2393,1.832,.4214,2.763,.558,.5023,.4549,2.34,2.2903,3.0822,5.4103,.6973,2.9302,.1816,5.8906-1.4517,8.3369-.2988,.4478-.3257,.999-.0713,1.4741,.2603,.4868,.7695,.7891,1.3291,.7891h8.9331c.4438,0,.8623-.1899,1.1479-.5215,.2764-.3208,.3994-.7437,.3374-1.1606-.3254-2.1784-1.2852-8.5849-3.4286-13.584l3.9362,.2625c.2903,.03,10.8778,1.1662,17.7166,6.885,.0908,.0767,.2051,.1162,.3203,.1162,.0723,0,.1445-.0156,.2119-.0469,.1758-.0825,.2881-.2588,.2881-.4531v-5.5253c3.3505-.257,6-3.0594,6-6.4747v-11c0-3.4152-2.6495-6.2177-6-6.4747ZM9,29.7632v-3.5483c0-2.333,1.5703-4.2314,3.5-4.2314h.5v12.0112h-.5c-1.9297,0-3.5-1.8984-3.5-4.2314Zm20.9663,22.6938c.0195,.1309-.0181,.2588-.106,.3604-.0952,.1108-.2378,.1743-.3901,.1743h-8.9331c-.1929,0-.3604-.0977-.4473-.2607-.0371-.0693-.1094-.2515,.0215-.4468,1.7891-2.6802,2.355-5.9204,1.5923-9.124-.5588-2.3491-1.6739-4.0107-2.5112-5.0009,.1433,.012,.2863,.0294,.4296,.039l6.7756,.4519c1.4865,3.2765,2.6885,7.9119,3.5687,13.8069Zm1.0337-14.5024l-11.3115-.7544c-1.5327-.1021-3.063-.3521-4.5479-.7437-.6714-.1772-1.1406-.7783-1.1406-1.4624v-14.0103c0-.6841,.4692-1.2852,1.1406-1.4624,1.4849-.3916,3.0151-.6416,4.5479-.7437l11.3115-.7539v19.9307Zm18,6.4971c-6.3689-4.8357-14.9624-6.1545-17-6.4078V17.9346c2.0376-.2532,10.6311-1.5725,17-6.4078V44.4517Zm6-10.9624c0,2.8639-2.2014,5.2208-5,5.4747V17.0146c2.7986,.2538,5,2.6108,5,5.4747v11Z"
+                  ></path>
+                </g>
+              </g>
             </svg>
+            <span>Promotion </span>
+          </div>
 
-            <p class="ms-3 font-normal">Promotion</p>
-          </RouterLink>
+          <!-- Submenu -->
+          <ul v-if="showSubMenuPromotion" class="space-y-1 pl-8 bg-[#ededee]">
+            <li>
+              <RouterLink
+                :to="{ name: 'create-category' }"
+                class="flex items-center px-3 py-3 gap-4 transition-colors duration-200"
+                :class="{
+                  ' text-[#164a9f] font-medium':
+                    activeTab === 'create-category',
+                  'text-gray-600 hover:text-[#164a9f] ':
+                    activeTab !== 'create-category',
+                }"
+                @click="activeTab = 'create-category'"
+              >
+                <span
+                  class="w-2 h-2 rounded-full mr-2"
+                  :class="{
+                    'bg-[#164a9f]': activeTab === 'create-category',
+                    ' bg-[#e6e6e6]': activeTab !== 'create-category',
+                  }"
+                ></span>
+                Create Promotion Category
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink
+                :to="{ name: 'category' }"
+                class="flex items-center px-3 py-2 gap-4 transition-colors duration-200"
+                :class="{
+                  ' text-[#164a9f] font-medium': activeTab === 'category',
+                  'text-gray-600 hover:text-[#164a9f] ':
+                    activeTab !== 'category',
+                }"
+                @click="activeTab = 'category'"
+              >
+                <span
+                  class="w-2 h-2 rounded-full mr-2"
+                  :class="{
+                    'bg-[#164a9f]': activeTab === 'category',
+                    'bg-[#e6e6e6]': activeTab !== 'category',
+                  }"
+                ></span>
+                Promotion Categories
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink
+                :to="{ name: 'apply' }"
+                class="flex items-center px-3 py-2 gap-4 transition-colors duration-200"
+                :class="{
+                  ' text-[#164a9f] font-medium': activeTab === 'apply',
+                  'text-gray-600 hover:text-[#164a9f] ': activeTab !== 'apply',
+                }"
+                @click="activeTab = 'apply'"
+              >
+                <span
+                  class="w-2 h-2 rounded-full mr-2"
+                  :class="{
+                    'bg-[#164a9f]': activeTab === 'apply',
+                    'bg-[#e6e6e6]': activeTab !== 'apply',
+                  }"
+                ></span>
+                Apply Promotions
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink
+                :to="{ name: 'list' }"
+                class="flex items-center px-3 py-2 gap-4 transition-colors duration-200"
+                :class="{
+                  ' text-[#164a9f] font-medium': activeTab === 'list',
+                  'text-gray-600 hover:text-[#164a9f] ': activeTab !== 'list',
+                }"
+                @click="activeTab = 'list'"
+              >
+                <span
+                  class="w-2 h-2 rounded-full mr-2"
+                  :class="{
+                    'bg-[#164a9f]': activeTab === 'list',
+                    'bg-[#e6e6e6]': activeTab !== 'list',
+                  }"
+                ></span>
+                Promotion List
+              </RouterLink>
+            </li>
+          </ul>
         </li>
 
         <li>
@@ -424,7 +514,8 @@ export default {
   data() {
     return {
       activeTab: this.$route.name,
-      showSubMenu: false,
+      showSubMenuRateAvailable: false,
+      showSubMenuPromotion: false,
     };
   },
   computed: {
@@ -436,12 +527,20 @@ export default {
         "room-availabilities",
         "cancellation-policy",
       ];
+
       return rateRoutes.includes(this.activeTab);
+    },
+    isPromotionActive() {
+      const promotionRoute = ["create-category", "category", "apply", "list"];
+      return promotionRoute.includes(this.activeTab);
     },
   },
   methods: {
-    toggleSubMenu() {
-      this.showSubMenu = !this.showSubMenu;
+    toggleSubMenuRate() {
+      this.showSubMenuRateAvailable = !this.showSubMenuRateAvailable;
+    },
+    toggleSubMenuPromotion() {
+      this.showSubMenuPromotion = !this.showSubMenuPromotion;
     },
   },
   watch: {
@@ -456,8 +555,14 @@ export default {
         "cancellation-policy",
       ];
 
+      const promotionRoute = ["create-category", "category", "apply", "list"];
+
       if (rateRoutes.includes(newName)) {
-        this.showSubMenu = true;
+        this.showSubMenuRateAvailable = true;
+      }
+
+      if (promotionRoute.includes(newName)) {
+        this.showSubMenuPromotion = true;
       }
     },
   },

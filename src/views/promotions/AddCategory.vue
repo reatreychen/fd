@@ -472,7 +472,7 @@
                 type="radio"
                 value=""
                 name="colored-radio"
-                class="w-4 h-4 text-[#164a9f] bg-[#e6e6e6] appearance-none rounded-full focus:ring-[#164a9f] dark:focus:ring-red-600"
+                class="w-4 h-4 text-[#164a9f] bg-[#e6e6e6] appearance-none rounded-full"
               />
               <p class="text-[#2a2f39] font-normal">Anytime</p>
             </div>
@@ -515,7 +515,7 @@
             <div class="flex items-center gap-4">
               <input
                 type="checkbox"
-                class="w-4 h-4 appearance-none border-none bg-[#e6e6e6] checked:bg-[#164a9f] checked:border-[#164a9f]"
+                class="w-4 h-4 appearance-none border-none bg-[#e6e6e6] checked:bg-[#164a9f]"
               />
               <p class="text-[#2a2f39] font-normal">Check/Uncheck All</p>
             </div>

@@ -169,7 +169,8 @@
                   <input
                     id="red-radio"
                     type="radio"
-                    value=""
+                    value="sameAsCancellationFee"
+                    v-model="form.sameAsCancellationFee"
                     name="colored-radio"
                     class="w-4 h-4 text-[#164a9f] bg-[#e6e6e6] appearance-none rounded-full focus:ring-[#164a9f] dark:focus:ring-red-600"
                   />
@@ -183,7 +184,8 @@
                     <input
                       id="red-radio"
                       type="radio"
-                      value=""
+                      value="guestWillCharged"
+                      v-model="form.guestCharged"
                       name="colored-radio"
                       class="w-4 h-4 text-[#164a9f] bg-[#e6e6e6] appearance-none rounded-full focus:ring-[#164a9f] dark:focus:ring-red-600"
                     />
@@ -212,7 +214,7 @@
                     <input
                       id="red-radio"
                       type="radio"
-                      value=""
+                      value="yes"
                       name="colored-radio"
                       class="w-4 h-4 text-[#164a9f] bg-[#e6e6e6] appearance-none rounded-full focus:ring-[#164a9f] dark:focus:ring-red-600"
                     />
@@ -330,6 +332,8 @@ export default {
         cancellationOption: "",
         chargeAmount: "",
         daysBefore: "",
+        sameAsCancellationFee: "",
+        guestCharged: "",
       },
       errors: {},
     };
